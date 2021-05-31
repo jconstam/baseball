@@ -5,9 +5,8 @@ import random
 
 class D6s:
     @staticmethod
-    def roll_one():
-        return random.randint(1, 6)
-
-    @staticmethod
-    def roll_two():
-        return D6s.roll_one() + D6s.roll_one()
+    def roll(count: int = 1) -> int:
+        results = []
+        for _ in range(count):
+            results.append(random.randint(1, 6))
+        return results

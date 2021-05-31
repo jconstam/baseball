@@ -1,4 +1,4 @@
-.PHONY: lint test
+.PHONY: lint test coverage coveralls
 
 coverage:
 	coverage run --source=baseball --branch -m pytest tests/
@@ -6,7 +6,7 @@ coverage:
 coveralls: coverage
 	coveralls --service=github
 
-test: lint
+test:
 	pytest
 
 lint:
