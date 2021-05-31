@@ -1,0 +1,51 @@
+name: CI Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  lint:
+    name: 'Lint Python'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.6.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.6.9
+    - name: Setup
+      uses: ./.github/actions/setup
+    - name: Lint
+      run: make lint
+  test:
+    name: 'Test Python'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.6.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.6.9
+    - name: Setup
+      uses: ./.github/actions/setup
+    - name: Run tests
+      run: make test
+  coverage:
+    name: 'Python Test Coverage'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.6.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.6.9
+    - name: Setup
+      uses: ./.github/actions/setup
+    - name: Run tests
+      run: make coveralls
