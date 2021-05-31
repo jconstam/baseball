@@ -16,7 +16,6 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.6.9
-      shell: bash
     - name: Setup
       uses: ./.github/actions/setup
     - name: Lint
@@ -30,7 +29,6 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.6.9
-      shell: bash
     - name: Setup
       uses: ./.github/actions/setup
     - name: Run tests
@@ -44,7 +42,6 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.6.9
-      shell: bash
     - name: Setup
       uses: ./.github/actions/setup
     - name: Run tests
