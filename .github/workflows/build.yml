@@ -48,4 +48,4 @@ jobs:
     - name: Setup
       uses: ./.github/actions/setup
     - name: Run tests
-      run: make coverage_github
+      run: make coveralls
