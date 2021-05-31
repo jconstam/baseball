@@ -10,4 +10,4 @@ class D6s:
 
     @staticmethod
     def roll_two():
-        return D6s.roll_one() + D6s.roll_two()
+        return D6s.roll_one() + D6s.roll_one()

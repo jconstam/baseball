@@ -1,1 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite errors="0" failures="0" hostname="artemis" name="pytest" skipped="0" tests="1" time="0.428" timestamp="2021-05-30T20:36:48.463562"><testcase classname="tests.test_random" file="tests/test_random.py" line="5" name="test__one_range" time="0.391"></testcase></testsuite></testsuites>
