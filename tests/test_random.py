@@ -1,24 +1,27 @@
 #!/usr/bin/env python3
 
+import random
+import unittest
+import unittest.mock
+
 from baseball.random import D6s
 
-TEST_COUNT = 1000000
-DICE_COUNT = 2
 
+class D6Tests(unittest.TestCase):
+    def setup_mock(self, side_effects):
+        random.randint = unittest.mock.Mock()
+        random.randint.side_effect = side_effects
 
-def test__roll_one():
-    for _ in range(TEST_COUNT):
-        results = D6s.roll()
-        assert len(results) == 1
-        assert results[0] >= 1
-        assert results[0] <= 6
+    def test__roll_one(self):
+        for i in range(1, 6):
+            self.setup_mock([i])
+            assert D6s.roll() == [i]
+            random.randint.assert_has_calls([unittest.mock.call(1, 6)])
 
-
-def test__rolls():
-    for _ in range(TEST_COUNT):
-        for count in range(1, DICE_COUNT):
-            results = D6s.roll(count)
-            assert len(results) == count
-            for die in results:
-                assert die >= 1
-                assert die <= 6
+    def test__roll_two(self):
+        for i in range(1, 6):
+            for j in range(1, 6):
+                self.setup_mock([i, j])
+                assert D6s.roll(2) == [i, j]
+                random.randint.assert_has_calls(
+                    [unittest.mock.call(1, 6), unittest.mock.call(1, 6)])
