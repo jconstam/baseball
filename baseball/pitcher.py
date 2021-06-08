@@ -25,12 +25,12 @@ class PITCH_RESULT(IntEnum):
 
 class Pitcher:
     __pitch_lookup: Dict[int, PITCH_RESULT] = {
-        0: PITCH_RESULT.SWING,
         1: PITCH_RESULT.SWING,
         2: PITCH_RESULT.SWING,
         3: PITCH_RESULT.SWING,
-        4: PITCH_RESULT.BALL,
-        5: PITCH_RESULT.BALL
+        4: PITCH_RESULT.SWING,
+        5: PITCH_RESULT.BALL,
+        6: PITCH_RESULT.BALL
     }
 
     __swing_lookup: Dict[int, Dict[int, PITCH_RESULT]] = {
@@ -70,15 +70,21 @@ class Pitcher:
     }
 
     @staticmethod
+    def _validate_results(results, length, name):
+        assert isinstance(results, list), 'Invalid {}: {}'.format(name, results)
+        assert len(results) == length, 'Invalid {} size: {}'.format(name, results)
+        for idx, val in enumerate(results):
+            assert isinstance(val, int), 'Invalid {} at {}: {}'.format(name, idx, val)
+            assert val >= 1 and val <= 6, 'Invalid {} at {}: {}'.format(name, idx, val)
+
+    @staticmethod
     def run_next_action():
         pitch = random.D6s.roll()
-        assert pitch >= 1 and pitch <= 6, 'Invalid pitch: {}'.format(pitch)
-        pitch_result = Pitcher.__pitch_lookup[pitch]
+        Pitcher._validate_results(pitch, 1, 'pitch')
+        pitch_result = Pitcher.__pitch_lookup[pitch[0]]
         if pitch_result == PITCH_RESULT.BALL:
             return pitch_result
         else:
             swing = random.D6s.roll(2)
-            assert len(swing) == 2, 'Invalid swing size: {}'.format(swing)
-            assert swing[0] >= 1 and swing[0] <= 6, 'Invalid swing[0]: {}'.format(swing[0])
-            assert swing[1] >= 1 and swing[1] <= 6, 'Invalid swing[1]: {}'.format(swing[1])
+            Pitcher._validate_results(swing, 2, 'swing')
             return Pitcher.__swing_lookup[swing[0]][swing[1]]
