@@ -5,6 +5,7 @@ from typing import Dict
 
 from . import random
 
+
 class PITCH_RESULT(IntEnum):
     BALL = 1,
     SWING = 2,
@@ -22,6 +23,7 @@ class PITCH_RESULT(IntEnum):
     DOUBLE__3_BASE = 14,
     FLY_OUT__RBI_THIRD = 15,
     GROUND_OUT__DOUBLE_PLAY = 16
+
 
 class Pitcher:
     __pitch_lookup: Dict[int, PITCH_RESULT] = {
@@ -71,11 +73,15 @@ class Pitcher:
 
     @staticmethod
     def _validate_results(results, length, name):
-        assert isinstance(results, list), 'Invalid {}: {}'.format(name, results)
-        assert len(results) == length, 'Invalid {} size: {}'.format(name, results)
+        assert isinstance(
+            results, list), 'Invalid {}: {}'.format(name, results)
+        assert len(results) == length, 'Invalid {} size: {}'.format(
+            name, results)
         for idx, val in enumerate(results):
-            assert isinstance(val, int), 'Invalid {} at {}: {}'.format(name, idx, val)
-            assert val >= 1 and val <= 6, 'Invalid {} at {}: {}'.format(name, idx, val)
+            assert isinstance(val, int), 'Invalid {} at {}: {}'.format(
+                name, idx, val)
+            assert val >= 1 and val <= 6, 'Invalid {} at {}: {}'.format(
+                name, idx, val)
 
     @staticmethod
     def run_next_action():
