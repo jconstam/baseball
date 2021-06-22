@@ -18,7 +18,7 @@ class PitcherExceptionTests(PitcherTestBase):
     def validate_exception_with_message(self, exception, message, function, *args, **kwargs):
         try:
             function(*args, **kwargs)
-            self.assertFail()
+            self.assertFalse()
         except Exception as ex:
             self.assertIsInstance(ex, exception)
             self.assertEqual(ex.args[0], message)

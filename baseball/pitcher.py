@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from enum import IntEnum
-from typing import Dict
+from typing import Dict, List
 
 from . import random
 
@@ -72,19 +72,15 @@ class Pitcher:
     }
 
     @staticmethod
-    def _validate_results(results, length, name):
-        assert isinstance(
-            results, list), 'Invalid {}: {}'.format(name, results)
-        assert len(results) == length, 'Invalid {} size: {}'.format(
-            name, results)
+    def _validate_results(results: List[int], length: int, name: str) -> None:
+        assert isinstance(results, list), 'Invalid {}: {}'.format(name, results)
+        assert len(results) == length, 'Invalid {} size: {}'.format(name, results)
         for idx, val in enumerate(results):
-            assert isinstance(val, int), 'Invalid {} at {}: {}'.format(
-                name, idx, val)
-            assert val >= 1 and val <= 6, 'Invalid {} at {}: {}'.format(
-                name, idx, val)
+            assert isinstance(val, int), 'Invalid {} at {}: {}'.format(name, idx, val)
+            assert val >= 1 and val <= 6, 'Invalid {} at {}: {}'.format(name, idx, val)
 
     @staticmethod
-    def run_next_action():
+    def run_next_action() -> None:
         pitch = random.D6s.roll()
         Pitcher._validate_results(pitch, 1, 'pitch')
         pitch_result = Pitcher.__pitch_lookup[pitch[0]]
