@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 
 from enum import IntEnum
-from typing import Tuple
-
-from .pitcher import PITCH_RESULT
 
 
 class PlayerLocation(IntEnum):
